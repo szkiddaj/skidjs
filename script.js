@@ -207,7 +207,7 @@ function clantag_main() {
     timeout = 500;
 
   switch (anim) {
-    case "Gaysense":
+    case "Gamesense":
       if (!CT.state || !CT.from) {
         CT.state = "write";
         CT.from = 0;
