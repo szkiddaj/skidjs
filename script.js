@@ -173,10 +173,11 @@ main();
 function resetscore_main() {
   const tabName = jsName + " - General",
     enabled = UI.GetValue(["Config", tabName, tabName, "Resetscore on death"]),
-    me = Entity.GetLocalPlayer(),
-    victim = Entity.GetEntityFromUserID(Event.GetInt("userid"));
 
-  if (enabled && me == victim) Cheat.ExecuteCommand("rs");
+    if (enabled && 
+      Entity.GetLocalPlayer() == Entity.GetEntityFromUserID(Event.GetInt("attacker")) &&
+      Entity.GetLocalPlayer() != Entity.GetEntityFromUserID(Event.GetInt("userid"))
+    ) Cheat.ExecuteCommand("rs");
 }
 Cheat.RegisterCallback("player_death", "resetscore_main");
 
@@ -335,9 +336,6 @@ function killsound_getRandomSound() {
     str = UI.GetString(["Config", tabName, tabName, "Sound(s) (Separate file names with +)"]),
     sounds = str.split("+"),
     sound = sounds[Math.floor(Math.random() * sounds.length)];
-
-  Cheat.Print(str);
-  Cheat.Print(sound);
 
   return sound + ".wav";
 }
