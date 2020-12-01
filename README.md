@@ -1,7 +1,6 @@
 # skidjs
 #
 ##### General
-#
 ###### **Resetscore on death**
 Reset score on community servers
 #
