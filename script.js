@@ -162,7 +162,7 @@ function resetscore_main() {
   if (
     enabled &&
     Entity.GetLocalPlayer() == Entity.GetEntityFromUserID(Event.GetInt("attacker")) &&
-    Entity.GetLocalPlayer() != Entity.GetEntityFromUserID(Event.GetInt("userid"))
+    Entity.GetLocalPlayer() == Entity.GetEntityFromUserID(Event.GetInt("userid"))
   )
     Cheat.ExecuteCommand("rs");
 }
