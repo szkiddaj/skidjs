@@ -18,9 +18,9 @@ Turn on/off kill message
 ###### **Text**
 Kill message text(s)
 - Multiple text separated with +
-- Placeholders (or what they called)
+- Placeholders (or how they called)
 - - **_v** Victim name
-- - **_shots** how many times he was shooted
+- - **_shots** how many times the victim was shooted
 #
 ##### Minimum damage override
 ###### **Minimum damage**
