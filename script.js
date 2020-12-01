@@ -11,23 +11,8 @@ function setTimeout(cb, wait) {
 
   return _timeouts.length - 1;
 }
-function setInterval(cb, wait) {
-  var cur_time = new Date().getTime();
-
-  _timeouts.push({
-    date: cur_time,
-    wait: wait,
-    call: cb,
-    type: "interval",
-  });
-
-  return _timeouts.length - 1;
-}
 function clearTimeout(timeout) {
   _timeouts.splice(timeout, 1);
-}
-function clearInterval(timeout) {
-  clearTimeout(timeout);
 }
 function _setTimeoutOnFrame() {
   var cur_time = new Date().getTime();
