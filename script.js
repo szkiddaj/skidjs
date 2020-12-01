@@ -171,8 +171,6 @@ main();
 
 // General
 function resetscore_main() {
-  if (scriptDisabled) return;
-
   const tabName = jsName + " - General",
     enabled = UI.GetValue(["Config", tabName, tabName, "Resetscore on death"]),
     me = Entity.GetLocalPlayer(),
@@ -186,7 +184,6 @@ Cheat.RegisterCallback("player_death", "resetscore_main");
 var CT = {};
 
 function clantag_main() {
-  if (scriptDisabled) return;
   const tabName = jsName + " - Clantag";
 
   var enabled = UI.GetValue(["Config", tabName, tabName, "Enable"]);
@@ -242,8 +239,6 @@ clantag_main();
 var shots = {};
 
 function killmsg_main() {
-  if (scriptDisabled) return;
-
   const tabName = jsName + " - Killmsg",
     enabled = UI.GetValue(["Config", tabName, tabName, "Enable"]);
 
@@ -265,8 +260,6 @@ function killmsg_main() {
 Cheat.RegisterCallback("player_death", "killmsg_main");
 
 function killmsg_hurt() {
-  if (scriptDisabled) return;
-
   if (
     Entity.GetLocalPlayer() == Entity.GetEntityFromUserID(Event.GetInt("attacker")) &&
     Entity.GetLocalPlayer() != Entity.GetEntityFromUserID(Event.GetInt("userid"))
@@ -280,8 +273,6 @@ Cheat.RegisterCallback("player_hurt", "killmsg_hurt");
 // Mindmg override
 
 function mindmg_main() {
-  if (scriptDisabled) return;
-
   if (
     UI.GetValue([
       "Config",
@@ -313,7 +304,7 @@ var KS = {
 
 function killsound_main() {
   const tabName = jsName + " - Kill sound";
-  if (scriptDisabled || !UI.GetValue(["Config", tabName, tabName, "Enable"])) return;
+  if (!UI.GetValue(["Config", tabName, tabName, "Enable"])) return;
 
   if (
     Entity.GetLocalPlayer() == Entity.GetEntityFromUserID(Event.GetInt("attacker")) &&
@@ -327,7 +318,6 @@ function killsound_main() {
 }
 
 function killsound_reset() {
-  if (scriptDisabled) return;
   const tabName = jsName + " - Kill sound";
 
   if (
