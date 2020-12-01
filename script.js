@@ -157,12 +157,14 @@ main();
 // General
 function resetscore_main() {
   const tabName = jsName + " - General",
-    enabled = UI.GetValue(["Config", tabName, tabName, "Resetscore on death"]),
+    enabled = UI.GetValue(["Config", tabName, tabName, "Resetscore on death"]);
 
-    if (enabled && 
-      Entity.GetLocalPlayer() == Entity.GetEntityFromUserID(Event.GetInt("attacker")) &&
-      Entity.GetLocalPlayer() != Entity.GetEntityFromUserID(Event.GetInt("userid"))
-    ) Cheat.ExecuteCommand("rs");
+  if (
+    enabled &&
+    Entity.GetLocalPlayer() == Entity.GetEntityFromUserID(Event.GetInt("attacker")) &&
+    Entity.GetLocalPlayer() != Entity.GetEntityFromUserID(Event.GetInt("userid"))
+  )
+    Cheat.ExecuteCommand("rs");
 }
 Cheat.RegisterCallback("player_death", "resetscore_main");
 
