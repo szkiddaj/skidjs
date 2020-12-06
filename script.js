@@ -112,6 +112,21 @@ var jsName = "skid.js",
         },
       ],
     },
+    {
+      name: "Scope FOV",
+      options: [
+        {
+          name: "Enable",
+          type: "checkbox",
+        },
+        {
+          name: "Scope FOV",
+          type: "slider",
+          min: 50.0,
+          max: 150.0,
+        },
+      ],
+    },
   ];
 
 function main() {
@@ -240,9 +255,11 @@ function killmsg_main() {
       allMsg = msgStr.split("+"),
       msg = allMsg[Math.floor(Math.random() * allMsg.length)];
 
-    msg = msg.replace("_v", Entity.GetName(victim) || "nn").replace("_shots", shots[victimId] || 1);
+    msg = msg
+      .replace("_v", Entity.GetName(Entity.GetEntityFromUserID(Event.GetInt("userid"))) || "nn")
+      .replace("_shots", shots[Event.GetInt("userid")] || 1);
     Cheat.ExecuteCommand("say " + msg);
-    delete shots[victimId];
+    delete shots[Event.GetInt("userid")];
   } else shots = {};
 }
 Cheat.RegisterCallback("player_death", "killmsg_main");
@@ -329,3 +346,29 @@ function killsound_getRandomSound() {
 
 Cheat.RegisterCallback("player_death", "killsound_main");
 Global.RegisterCallback("FrameStageNotify", "killsound_reset");
+
+// Scope FOV
+
+const SFOV = {
+  defaultFov: UI.GetValue(["Misc.", "View", "General", "Field of view"]),
+};
+
+function scopefov_main() {
+  const tabName = jsName + " - Scope FOV";
+
+  if (!UI.GetValue(["Config", tabName, tabName, "Enable"])) {
+    UI.SetValue(["Misc.", "View", "General", "Field of view"], SFOV.defaultFov);
+    return;
+  }
+
+  const localPlayer = Entity.GetLocalPlayer(),
+    isScoped = Entity.GetProp(localPlayer, "CCSPlayer", "m_bIsScoped"),
+    scopeVal = UI.GetValue(["Config", tabName, tabName, "Scope FOV"]);
+
+  // set FOV
+  UI.SetValue(["Misc.", "View", "General", "Field of view"], isScoped ? scopeVal : SFOV.defaultFov);
+
+  setTimeout(scopefov_main, 25);
+}
+
+setTimeout(scopefov_main, 25);
